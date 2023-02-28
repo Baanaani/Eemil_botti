@@ -15,18 +15,16 @@ client.on("ready", (c) => {
     console.log(`✅ ${c.user.tag} is online`)
 });
 
-/*lukee viestin
-client.on("messageCreate", (viesti) => {
-    console.log(viesti);
-})*/
 
-//lukee viestin sisällön
-client.on("messageCreate", (viesti) => {
-    if (viesti.author.bot){
-        return;
+client.on("interactionCreate", (interaction) => {
+    if (!interaction.isChatInputCommand()) return;
+
+    if (interaction.commandName === "hei"){
+        interaction.reply("Hei!");
     }
-    if (viesti.content === "Hei"){
-        viesti.reply("Hei");
+
+    if (interaction.commandName === "ping"){
+        interaction.reply("Pong!");
     }
 });
 
