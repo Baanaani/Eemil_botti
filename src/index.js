@@ -40,7 +40,10 @@ client.on("interactionCreate", (interaction) => {
     if (interaction.commandName === "lopeta"){
         ajastinpalla = false;
         clearInterval(lopettaja);
+
+        lopettaja = null;
         interaction.reply("Ajastin lopetettu ajalla: " + aika);
+        aika = 0;
     }
 
 });
