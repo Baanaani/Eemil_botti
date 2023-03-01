@@ -45,6 +45,12 @@ client.on("messageCreate", message => {
     if (message.author.bot || !message.guild) return;
     const prefix = "?"
     const args = message.content.slice(prefix.length).trim().split(/ +/g)
+    if (message.content === "ping"){
+        message.reply("pong");
+    }
+    if (message.content === "SMASH"){
+        message.reply("pong");
+    }
 
 
     if (!message.content.toLowerCase().startsWith(prefix)) return;
@@ -56,7 +62,9 @@ client.on("messageCreate", message => {
             message
         })
     }
+
 })
+
 
 client.DisTube.on("playSong", (queue,song) => {
     queue.textChannel.send("Nyt toistaa: " + song.name)
