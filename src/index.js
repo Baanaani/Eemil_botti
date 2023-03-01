@@ -14,7 +14,7 @@ let ajastinpalla = false;
 let aika = 0;
 let lopettaja = null;
 
-
+//muutos
 
 client.on("ready", (c) => {
     console.log(`✅ ${c.user.tag} is online`)
