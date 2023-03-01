@@ -1,26 +1,66 @@
 require("dotenv").config();
-const { Client, IntentsBitField } = require('discord.js');
+/*const { Client, IntentsBitField } = require('discord.js');*/
 
-const client = new Client({
+const discord = require('discord.js');
+/*const client = new Client({
     intents:[
         IntentsBitField.Flags.Guilds,
         IntentsBitField.Flags.GuildMembers,
         IntentsBitField.Flags.GuildMessages,
-        IntentsBitField.Flags.GuildMembers,
+        IntentsBitField.Flags.GuildVoiceStates,
         IntentsBitField.Flags.MessageContent,
     ]
+})*/
+const client = new discord.Client({
+    intents: [
+        "Guilds",
+        "GuildMembers",
+        "GuildMessages",
+        "GuildVoiceStates",
+        "MessageContent",
+    ]
 })
+const { DisTube } = require("distube");
 let ajastinpalla = false;
 let aika = 0;
 let lopettaja = null;
 
+client.DisTube = new DisTube(client, {
+    leaveOnStop: false,
+    emitNewSongOnly: true,
+    emitAddSongWhenCreatingQueue: false,
+    emitAddListWhenCreatingQueue: false,
+})
+
+
 //muutos
+
+
 
 client.on("ready", (c) => {
     console.log(`✅ ${c.user.tag} is online`)
 });
 
+client.on("messageCreate", message => {
+    if (message.author.bot || !message.guild) return;
+    const prefix = "?"
+    const args = message.content.slice(prefix.length).trim().split(/ +/g)
 
+
+    if (!message.content.toLowerCase().startsWith(prefix)) return;
+
+    if (args.shift().toLowerCase() === "play") {
+        client.DisTube.play(message.member.voice.channel, args.join(" "), {
+            member: message.member,
+            textChannel: message.channel,
+            message
+        })
+    }
+})
+
+client.DisTube.on("playSong", (queue,song) => {
+    queue.textChannel.send("Nyt toistaa: " + song.name)
+})
 client.on("interactionCreate", (interaction) => {
     if (!interaction.isChatInputCommand()) return;
 
@@ -51,7 +91,7 @@ client.on("interactionCreate", (interaction) => {
 
 
 function ajastin() {
-    if (ajastinpalla == true){
+    if (ajastinpalla === true){
         aika = aika +1;
         console.log(aika);
     }else {
