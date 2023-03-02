@@ -27,15 +27,18 @@ let lopettaja = null;
 
 client.DisTube = new DisTube(client, {
     leaveOnStop: false,
+    leaveOnEmpty: false,
     emitNewSongOnly: true,
     emitAddSongWhenCreatingQueue: false,
     emitAddListWhenCreatingQueue: false,
 })
 
+//moi
 
 
-
-
+client.DisTube.on("error", (message, error) => {
+    console.error(`Error: ${error}`);
+});
 
 client.on("ready", (c) => {
     console.log(`✅ ${c.user.tag} is online`)
@@ -84,7 +87,8 @@ client.on("messageCreate", message => {
         message.reply("Musiikkin toisto lopetettu.");
     }
 })
-//moi
+
+
 
 client.DisTube.on("playSong", (queue,song) => {
     queue.textChannel.send("Nyt toistaa: " + song.name)
