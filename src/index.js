@@ -66,22 +66,22 @@ client.on("messageCreate", message => {
 
     if (message.content.toLowerCase() === prefix + "pause") {
         client.DisTube.pause(message);
-        message.reply("Music paused.");
+        message.reply("Musiikin toisto tauolla.");
     }
 
     if (message.content.toLowerCase() === prefix + "skip") {
         client.DisTube.skip(message);
-        message.reply("Skipped the current song.");
+        message.reply("Ohitettu tämän hetkinen biisi.");
     }
 
     if (message.content.toLowerCase() === prefix + "resume") {
         client.DisTube.resume(message);
-        message.reply("Music resumed.");
+        message.reply("Muusiikkin toisto jatkettu.");
     }
 
     if (message.content.toLowerCase() === prefix + "stop") {
         client.DisTube.stop(message);
-        message.reply("Music stopped.");
+        message.reply("Musiikkin toisto lopetettu.");
     }
 })
 //moi
