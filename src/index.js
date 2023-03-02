@@ -45,9 +45,9 @@ client.on("messageCreate", message => {
     if (message.author.bot || !message.guild) return;
     const prefix = "?"
     const args = message.content.slice(prefix.length).trim().split(/ +/g)
-    /*if (message.content === "ping"){
+    if (message.content === "ping"){
         message.reply("pong");
-    }*/
+    }
     if (message.content === "pong"){
         message.reply("ping");
     }
