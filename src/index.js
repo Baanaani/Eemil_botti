@@ -56,8 +56,6 @@ client.on("messageCreate", message => {
     }
 
 
-    if (!message.content.toLowerCase().startsWith(prefix)) return;
-
     if (args.shift().toLowerCase() === "play") {
         client.DisTube.play(message.member.voice.channel, args.join(" "), {
             member: message.member,
@@ -66,8 +64,27 @@ client.on("messageCreate", message => {
         })
     }
 
-})
+    if (message.content.toLowerCase() === prefix + "pause") {
+        client.DisTube.pause(message);
+        message.reply("Music paused.");
+    }
 
+    if (message.content.toLowerCase() === prefix + "skip") {
+        client.DisTube.skip(message);
+        message.reply("Skipped the current song.");
+    }
+
+    if (message.content.toLowerCase() === prefix + "resume") {
+        client.DisTube.resume(message);
+        message.reply("Music resumed.");
+    }
+
+    if (message.content.toLowerCase() === prefix + "stop") {
+        client.DisTube.stop(message);
+        message.reply("Music stopped.");
+    }
+})
+//moi
 
 client.DisTube.on("playSong", (queue,song) => {
     queue.textChannel.send("Nyt toistaa: " + song.name)
